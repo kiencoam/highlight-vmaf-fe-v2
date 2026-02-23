@@ -71,7 +71,8 @@ export default function FramesList({ highlightId }: FramesListProps) {
   if (frames.length === 0) {
     return (
       <div className="p-6 text-center text-gray-500">
-        No frames found for this highlight
+        No frames have VMAF score below threshold. All frames are of high
+        quality!
       </div>
     );
   }
@@ -154,7 +155,7 @@ export default function FramesList({ highlightId }: FramesListProps) {
             {/* VMAF Score Indicator */}
             <div className="mt-3">
               <div className="flex items-center gap-2 text-xs text-gray-600">
-                <span>Quality:</span>
+                <span>VMAF Score:</span>
                 <div className="flex-1 bg-gray-200 rounded-full h-2 max-w-xs">
                   <div
                     className={`h-2 rounded-full ${
