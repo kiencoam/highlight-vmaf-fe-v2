@@ -85,7 +85,7 @@ export default function CreateVideoModal({
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-900">
-            Create New Video Job
+            Import New Job
           </h2>
           <button
             onClick={handleClose}
@@ -134,7 +134,7 @@ export default function CreateVideoModal({
               }
               placeholder="Enter video title"
               disabled={loading}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full rounded-md border border-gray-300 text-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
           </div>
 
@@ -155,7 +155,7 @@ export default function CreateVideoModal({
               }
               placeholder="https://example.com/original.mp4"
               disabled={loading}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full rounded-md border border-gray-300 text-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
             <p className="mt-1 text-xs text-gray-500">
               Full URL to the original video file
@@ -179,7 +179,7 @@ export default function CreateVideoModal({
               }
               placeholder="https://example.com/highlight.mp4"
               disabled={loading}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full rounded-md border border-gray-300 text-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
             <p className="mt-1 text-xs text-gray-500">
               Full URL to the highlight video file

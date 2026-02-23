@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { fetchVideos } from "@/lib/api";
 import { Video, VIDEO_STATUS, STATUS_COLORS } from "@/lib/types";
 import CreateVideoModal from "./CreateVideoModal";
 
 export default function VideosList() {
+  const router = useRouter();
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +27,7 @@ export default function VideosList() {
 
   // Temporary state for search input
   const [searchInput, setSearchInput] = useState("");
-  
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -108,7 +110,9 @@ export default function VideosList() {
       {/* Header with Create Button */}
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">Videos Library</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Videos Library
+          </h2>
           <p className="mt-1 text-sm text-gray-500">
             Manage and analyze your video highlights
           </p>
@@ -130,7 +134,7 @@ export default function VideosList() {
               d="M12 4v16m8-8H4"
             />
           </svg>
-          Create Video
+          Import Job
         </button>
       </div>
 
@@ -149,7 +153,7 @@ export default function VideosList() {
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="Enter video title..."
-                className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 rounded-md border text-black border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 onClick={handleSearch}
@@ -171,7 +175,7 @@ export default function VideosList() {
                 setStatusFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-md border border-gray-300 text-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Status</option>
               <option value="0">Pending</option>
@@ -192,7 +196,7 @@ export default function VideosList() {
                 setPageSize(parseInt(e.target.value));
                 setCurrentPage(1);
               }}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-md border border-gray-300 text-black px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="10">10</option>
               <option value="20">20</option>
@@ -211,7 +215,7 @@ export default function VideosList() {
             <select
               value={orderBy}
               onChange={(e) => setOrderBy(e.target.value as any)}
-              className="rounded-md border border-gray-300 px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="rounded-md border border-gray-300 text-black px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="id">ID</option>
               <option value="title">Title</option>
@@ -221,7 +225,7 @@ export default function VideosList() {
             <select
               value={orderDirection}
               onChange={(e) => setOrderDirection(e.target.value as any)}
-              className="rounded-md border border-gray-300 px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="rounded-md border border-gray-300 text-black px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
@@ -255,52 +259,51 @@ export default function VideosList() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 ID
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Title
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {videos.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-gray-500">
+                <td
+                  colSpan={3}
+                  className="px-4 sm:px-6 py-8 text-center text-gray-500"
+                >
                   No videos found
                 </td>
               </tr>
             ) : (
               videos.map((video) => (
-                <tr key={video.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <tr
+                  key={video.id}
+                  onClick={() => router.push(`/videos/${video.id}`)}
+                  className="hover:bg-gray-50 cursor-pointer transition-colors duration-150 active:bg-gray-100"
+                >
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {video.id}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">
-                    <div className="max-w-md truncate" title={video.title}>
+                  <td className="px-4 sm:px-6 py-4 text-sm text-gray-900">
+                    <div
+                      className="max-w-xs sm:max-w-md truncate"
+                      title={video.title}
+                    >
                       {video.title}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                     <span
                       className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${STATUS_COLORS[video.status]}`}
                     >
                       {VIDEO_STATUS[video.status]}
                     </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <Link
-                      href={`/videos/${video.id}`}
-                      className="text-blue-600 hover:text-blue-900 font-medium"
-                    >
-                      View Details →
-                    </Link>
                   </td>
                 </tr>
               ))
