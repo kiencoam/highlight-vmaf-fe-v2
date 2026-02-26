@@ -83,7 +83,7 @@ export interface CreateVideoResponse {
 
 // Status mapping
 export const VIDEO_STATUS: Record<number, string> = {
-  0: "Pending",
+  0: "Downloading",
   1: "Processing",
   2: "Completed",
   "-1": "Failed",
