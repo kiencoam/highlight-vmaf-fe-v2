@@ -197,16 +197,23 @@ export default function VideoDetailPage() {
                         <span className="font-medium text-gray-900">
                           Highlight #{highlight.id}
                         </span>
-                        <div className="flex gap-4 text-sm text-gray-600">
-                          <span>
-                            Duration: {highlight.duration.toFixed(2)}s
+                        {highlight.duration !== null &&
+                        highlight.vmaf_mean !== null ? (
+                          <div className="flex gap-4 text-sm text-gray-600">
+                            <span>
+                              Duration: {highlight.duration.toFixed(2)}s
+                            </span>
+                            <span>
+                              VMAF Mean: {highlight.vmaf_mean.toFixed(2)}
+                            </span>
+                            <span>Min: {highlight.vmaf_min!.toFixed(2)}</span>
+                            <span>Max: {highlight.vmaf_max!.toFixed(2)}</span>
+                          </div>
+                        ) : (
+                          <span className="text-sm text-yellow-600 font-medium">
+                            ⏳ Processing...
                           </span>
-                          <span>
-                            VMAF Mean: {highlight.vmaf_mean.toFixed(2)}
-                          </span>
-                          <span>Min: {highlight.vmaf_min.toFixed(2)}</span>
-                          <span>Max: {highlight.vmaf_max.toFixed(2)}</span>
-                        </div>
+                        )}
                       </div>
                       <svg
                         className={`w-5 h-5 text-gray-500 transition-transform ${

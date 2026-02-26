@@ -26,10 +26,10 @@ export interface PaginatedResponse<T> {
 export interface Highlight {
   id: number;
   video_id: number;
-  vmaf_mean: number;
-  vmaf_min: number;
-  vmaf_max: number;
-  duration: number;
+  vmaf_mean: number | null;
+  vmaf_min: number | null;
+  vmaf_max: number | null;
+  duration: number | null;
 }
 
 // Frame Types
