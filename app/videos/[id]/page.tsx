@@ -193,28 +193,35 @@ export default function VideoDetailPage() {
                       onClick={() => toggleHighlight(highlight.id)}
                       className="w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left flex items-center justify-between transition-colors"
                     >
-                      <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-6">
                         <span className="font-medium text-gray-900">
                           Highlight #{highlight.id}
                         </span>
-                        {highlight.duration !== null &&
-                        highlight.vmaf_mean !== null ? (
+                        {highlight.status === 0 || highlight.status === 1 ? (
+                          <span className="text-sm text-yellow-600 font-medium">
+                          ⏳ Processing...
+                          </span>
+                        ) : highlight.status === 2 ? (
                           <div className="flex gap-4 text-sm text-gray-600">
-                            <span>
-                              Duration: {highlight.duration.toFixed(2)}s
-                            </span>
-                            <span>
-                              VMAF Mean: {highlight.vmaf_mean.toFixed(2)}
-                            </span>
-                            <span>Min: {highlight.vmaf_min!.toFixed(2)}</span>
-                            <span>Max: {highlight.vmaf_max!.toFixed(2)}</span>
+                          <span>
+                            Duration: {highlight.duration !== null ? highlight.duration.toFixed(2) + 's' : 'None'}
+                          </span>
+                          <span>
+                            VMAF Mean: {highlight.vmaf_mean !== null ? highlight.vmaf_mean.toFixed(2) : 'None'}
+                          </span>
+                          <span>
+                            Min: {highlight.vmaf_min !== null ? highlight.vmaf_min.toFixed(2) : 'None'}
+                          </span>
+                          <span>
+                            Max: {highlight.vmaf_max !== null ? highlight.vmaf_max.toFixed(2) : 'None'}
+                          </span>
                           </div>
                         ) : (
-                          <span className="text-sm text-yellow-600 font-medium">
-                            ⏳ Processing...
+                          <span className="text-sm text-red-600 font-medium">
+                          ❌ No result
                           </span>
                         )}
-                      </div>
+                        </div>
                       <svg
                         className={`w-5 h-5 text-gray-500 transition-transform ${
                           expandedHighlight === highlight.id

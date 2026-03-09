@@ -30,6 +30,7 @@ export interface Highlight {
   vmaf_min: number | null;
   vmaf_max: number | null;
   duration: number | null;
+  status: number;
 }
 
 // Frame Types
